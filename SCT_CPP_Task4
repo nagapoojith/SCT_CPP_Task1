@@ -1,0 +1,35 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+using namespace std;
+
+struct Product {
+    string name;
+    double price;
+    float rating;
+};
+
+int main() {
+    vector<Product> products = {
+        {"Wireless Mouse", 699.00, 4.3},
+        {"Mechanical Keyboard", 2499.50, 4.6},
+        {"Noise Cancelling Headphones", 3499.00, 4.1},
+        {"Smart Watch", 1599.99, 4.0},
+        {"Portable Speaker", 1199.00, 4.4}
+    };
+
+    ofstream file("products.csv");
+
+    if (file.is_open()) {
+        file << "Name,Price,Rating\n";
+        for (const auto& product : products) {
+            file << "\"" << product.name << "\"," << product.price << "," << product.rating << "\n";
+        }
+        file.close();
+        cout << "Product data successfully written to products.csv\n";
+    } else {
+        cout << "Error opening file.\n";
+    }
+
+    return 0;
+}
